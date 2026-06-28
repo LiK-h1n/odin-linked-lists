@@ -56,3 +56,31 @@ describe("LinkedList - Accessors", () => {
     expect(list.at(5)).toBeNull();
   });
 });
+
+describe("LinkedList - Search and Remove", () => {
+  let list;
+  beforeEach(() => {
+    list = createLinkedList();
+    list.append("apple");
+    list.append("banana");
+    list.append("cherry");
+  });
+
+  test("pop removes the last element", () => {
+    list.pop();
+    expect(list.size()).toBe(2);
+    expect(list.getTail().value).toBe("banana");
+    expect(list.getTail().next).toBeNull();
+  });
+
+  test("contains returns true if value exists", () => {
+    expect(list.contains("banana")).toBe(true);
+    expect(list.contains("dragonfruit")).toBe(false);
+  });
+
+  test("find returns the correct index or null", () => {
+    expect(list.find("apple")).toBe(0);
+    expect(list.find("cherry")).toBe(2);
+    expect(list.find("dragonfruit")).toBeNull();
+  });
+});

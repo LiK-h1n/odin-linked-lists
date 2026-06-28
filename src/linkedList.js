@@ -58,7 +58,63 @@ function createLinkedList() {
     return temp;
   };
 
-  return { getHead, getTail, size, append, prepend, at };
+  const pop = () => {
+    let popped = null;
+
+    if (head === null) {
+      return popped;
+    } else if (head === tail) {
+      popped = head;
+      head = null;
+      tail = null;
+    } else {
+      let temp = head;
+
+      while (temp.next !== tail) {
+        temp = temp.next;
+      }
+
+      popped = tail;
+      temp.next = null;
+      tail = temp;
+    }
+
+    --length;
+
+    return popped;
+  };
+
+  const contains = (data) => {
+    let temp = head;
+
+    while (temp !== null) {
+      if (temp.value === data) {
+        return true;
+      }
+
+      temp = temp.next;
+    }
+
+    return false;
+  };
+
+  const find = (data) => {
+    let temp = head;
+    let index = 0;
+
+    while (temp !== null) {
+      if (temp.value === data) {
+        return index;
+      }
+
+      temp = temp.next;
+      ++index;
+    }
+
+    return null;
+  };
+
+  return { getHead, getTail, size, append, prepend, at, pop, contains, find };
 }
 
 export { createNode, createLinkedList };
