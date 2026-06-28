@@ -32,3 +32,27 @@ describe("LinkedList - Growing", () => {
     expect(list.size()).toBe(2);
   });
 });
+
+describe("LinkedList - Accessors", () => {
+  let list;
+  beforeEach(() => {
+    list = createLinkedList();
+    list.append("A");
+    list.append("B");
+    list.append("C");
+  });
+
+  test("tail returns the last node", () => {
+    expect(list.getTail().value).toBe("C");
+  });
+
+  test("at(index) returns node at correct index", () => {
+    expect(list.at(0).value).toBe("A");
+    expect(list.at(1).value).toBe("B");
+    expect(list.at(2).value).toBe("C");
+  });
+
+  test("at(index) returns null if index is out of bounds", () => {
+    expect(list.at(5)).toBeNull();
+  });
+});

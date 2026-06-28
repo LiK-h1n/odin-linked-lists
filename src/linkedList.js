@@ -7,9 +7,12 @@ function createNode(data) {
 
 function createLinkedList() {
   let head = null;
+  let tail = null;
   let length = 0;
 
   const getHead = () => head;
+
+  const getTail = () => tail;
 
   const size = () => length;
 
@@ -18,6 +21,7 @@ function createLinkedList() {
 
     if (head === null) {
       head = node;
+      tail = node;
     } else {
       let temp = head;
 
@@ -26,6 +30,7 @@ function createLinkedList() {
       }
 
       temp.next = node;
+      tail = node;
     }
 
     ++length;
@@ -39,7 +44,21 @@ function createLinkedList() {
     ++length;
   };
 
-  return { getHead, size, append, prepend };
+  const at = (index) => {
+    let temp = head;
+
+    for (let i = 0; i < index; ++i) {
+      if (temp === null) {
+        return null;
+      }
+
+      temp = temp.next;
+    }
+
+    return temp;
+  };
+
+  return { getHead, getTail, size, append, prepend, at };
 }
 
 export { createNode, createLinkedList };
