@@ -99,3 +99,58 @@ describe("LinkedList - String Format", () => {
     expect(list.toString()).toBe("null");
   });
 });
+
+describe("LinkedList - Extra Credit (Corrected)", () => {
+  let list;
+  beforeEach(() => {
+    list = createLinkedList();
+    list.append(1);
+    list.append(2);
+    list.append(3);
+  });
+
+  describe("insertAt(index, ...values)", () => {
+    test("should insert multiple values at the given index", () => {
+      // Starting list: ( 1 ) -> ( 2 ) -> ( 3 )
+      list.insertAt(1, 10, 11);
+      // Expected: ( 1 ) -> ( 10 ) -> ( 11 ) -> ( 2 ) -> ( 3 )
+      expect(list.toString()).toBe(
+        "( 1 ) -> ( 10 ) -> ( 11 ) -> ( 2 ) -> ( 3 ) -> null"
+      );
+      expect(list.size()).toBe(5);
+    });
+
+    test("should insert at index 0 (updating head)", () => {
+      list.insertAt(0, 99);
+      expect(list.getHead().value).toBe(99);
+      expect(list.at(1).value).toBe(1);
+    });
+
+    test("should throw RangeError if index is below 0", () => {
+      expect(() => list.insertAt(-1, 5)).toThrow(RangeError);
+    });
+
+    test("should throw RangeError if index is above list size", () => {
+      expect(() => list.insertAt(10, 5)).toThrow(RangeError);
+    });
+  });
+
+  describe("removeAt(index)", () => {
+    test("should remove node at the correct index", () => {
+      // List: 1, 2, 3
+      list.removeAt(1); // Remove '2'
+      expect(list.toString()).toBe("( 1 ) -> ( 3 ) -> null");
+      expect(list.size()).toBe(2);
+    });
+
+    test("should remove head at index 0", () => {
+      list.removeAt(0);
+      expect(list.getHead().value).toBe(2);
+    });
+
+    test("should throw RangeError if index is out of bounds", () => {
+      expect(() => list.removeAt(-1)).toThrow(RangeError);
+      expect(() => list.removeAt(5)).toThrow(RangeError);
+    });
+  });
+});

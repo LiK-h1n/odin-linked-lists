@@ -129,6 +129,39 @@ function createLinkedList() {
     return string;
   };
 
+  const insertAt = (index, ...values) => {
+    if (index < 0 || index >= length) {
+      throw new RangeError("Invalid index to insert at");
+    }
+
+    if (index === 0) {
+      values.forEach((value) => {
+        prepend(value);
+      });
+    } else if (index === length - 1) {
+      values.forEach((value) => {
+        append(value);
+      });
+    } else {
+      let temp = head;
+
+      for (let i = 0; i < index - 1; ++i) {
+        temp = temp.next;
+      }
+
+      let next = temp.next;
+
+      values.forEach((value) => {
+        let node = createNode(value);
+        temp.next = node;
+        temp = temp.next;
+      });
+
+      temp.next = next;
+      length += values.length;
+    }
+  };
+
   return {
     getHead,
     getTail,
@@ -140,6 +173,7 @@ function createLinkedList() {
     contains,
     find,
     toString,
+    insertAt,
   };
 }
 
