@@ -13,7 +13,33 @@ function createLinkedList() {
 
   const size = () => length;
 
-  return { getHead, size };
+  const append = (data) => {
+    const node = createNode(data);
+
+    if (head === null) {
+      head = node;
+    } else {
+      let temp = head;
+
+      while (temp.next !== null) {
+        temp = temp.next;
+      }
+
+      temp.next = node;
+    }
+
+    ++length;
+  };
+
+  const prepend = (data) => {
+    const node = createNode(data);
+
+    node.next = head;
+    head = node;
+    ++length;
+  };
+
+  return { getHead, size, append, prepend };
 }
 
 export { createNode, createLinkedList };

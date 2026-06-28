@@ -13,3 +13,22 @@ describe("LinkedList - Basics", () => {
     expect(list.size()).toBe(0);
   });
 });
+
+describe("LinkedList - Growing", () => {
+  test("append adds to the end of the list", () => {
+    const list = createLinkedList();
+    list.append("A");
+    list.append("B");
+    expect(list.getHead().value).toBe("A");
+    expect(list.getHead().next.value).toBe("B");
+    expect(list.size()).toBe(2);
+  });
+
+  test("prepend adds to the start of the list", () => {
+    const list = createLinkedList();
+    list.append("B");
+    list.prepend("A");
+    expect(list.getHead().value).toBe("A");
+    expect(list.size()).toBe(2);
+  });
+});
