@@ -35,3 +35,24 @@ describe("LinkedList - at(index)", () => {
     expect(list.at(2)).toBeUndefined();
   });
 });
+
+describe("LinkedList - Pop and Search", () => {
+  let list;
+  beforeEach(() => {
+    list = createLinkedList();
+    list.append("A");
+    list.append("B");
+  });
+
+  test("pop() removes head and returns its value", () => {
+    const val = list.pop();
+    expect(val).toBe("A");
+    expect(list.head()).toBe("B");
+    expect(list.size()).toBe(1);
+  });
+
+  test("findIndex returns index or -1", () => {
+    expect(list.findIndex("B")).toBe(1);
+    expect(list.findIndex("Z")).toBe(-1);
+  });
+});

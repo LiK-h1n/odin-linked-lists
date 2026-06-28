@@ -19,7 +19,7 @@ function createLinkedList() {
   const prepend = (data) => {
     const node = createNode(data);
 
-    if (_head !== undefined) {
+    if (_size !== 0) {
       node.nextNode = _head;
     } else {
       _tail = node;
@@ -32,7 +32,7 @@ function createLinkedList() {
   const append = (data) => {
     const node = createNode(data);
 
-    if (_tail !== undefined) {
+    if (_size !== 0) {
       _tail.nextNode = node;
       _tail = node;
     } else {
@@ -44,7 +44,7 @@ function createLinkedList() {
   };
 
   const at = (index) => {
-    if (_head === undefined || index < 0 || index >= _size) {
+    if (_size === 0 || index < 0 || index >= _size) {
       return;
     }
 
@@ -57,7 +57,46 @@ function createLinkedList() {
     return temp.value;
   };
 
-  return { head, tail, size, prepend, append, at };
+  const pop = () => {
+    if (_size === 0) {
+      return;
+    } else {
+      const popped = _head.value;
+
+      if (_size !== 1) {
+        _head = _head.nextNode;
+      } else {
+        _head = undefined;
+        _tail = undefined;
+      }
+
+      --_size;
+
+      return popped;
+    }
+  };
+
+  const findIndex = (data) => {
+    if (_size === 0) {
+      return -1;
+    }
+
+    let index = 0;
+    let temp = _head;
+
+    while (temp !== null) {
+      if (temp.value === data) {
+        return index;
+      }
+
+      temp = temp.nextNode;
+      ++index;
+    }
+
+    return -1;
+  };
+
+  return { head, tail, size, prepend, append, at, pop, findIndex };
 }
 
 export { createNode, createLinkedList };
