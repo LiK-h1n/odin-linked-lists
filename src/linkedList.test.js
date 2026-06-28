@@ -56,3 +56,17 @@ describe("LinkedList - Pop and Search", () => {
     expect(list.findIndex("Z")).toBe(-1);
   });
 });
+
+describe("LinkedList - toString", () => {
+  test("toString returns empty string when list is empty", () => {
+    const list = createLinkedList();
+    expect(list.toString()).toBe("");
+  });
+
+  test("toString matches required format", () => {
+    const list = createLinkedList();
+    list.append("apple");
+    list.append("banana");
+    expect(list.toString()).toBe("( apple ) -> ( banana ) -> null");
+  });
+});

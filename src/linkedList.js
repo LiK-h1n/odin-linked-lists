@@ -96,7 +96,26 @@ function createLinkedList() {
     return -1;
   };
 
-  return { head, tail, size, prepend, append, at, pop, findIndex };
+  const toString = () => {
+    let string = "";
+
+    if (_size === 0) {
+      return string;
+    } else {
+      let temp = _head;
+
+      while (temp !== null) {
+        string += `( ${temp.value} ) -> `;
+        temp = temp.nextNode;
+      }
+
+      string += "null";
+
+      return string;
+    }
+  };
+
+  return { head, tail, size, prepend, append, at, pop, findIndex, toString };
 }
 
 export { createNode, createLinkedList };
