@@ -1,5 +1,5 @@
-function createNode() {
-  let value = null;
+function createNode(data = null) {
+  let value = data;
   let nextNode = null;
 
   return { value, nextNode };
@@ -8,12 +8,42 @@ function createNode() {
 function createLinkedList() {
   let _head;
   let _tail;
+  let _size = 0;
 
-  const head = () => _head;
+  const head = () => (_head === undefined ? _head : _head.value);
 
-  const tail = () => _tail;
+  const tail = () => (_tail === undefined ? _tail : _tail.value);
 
-  return { head, tail };
+  const size = () => _size;
+
+  const prepend = (data) => {
+    const node = createNode(data);
+
+    if (_head !== undefined) {
+      node.nextNode = _head;
+    } else {
+      _tail = node;
+    }
+
+    _head = node;
+    ++_size;
+  };
+
+  const append = (data) => {
+    const node = createNode(data);
+
+    if (_tail !== undefined) {
+      _tail.nextNode = node;
+      _tail = node;
+    } else {
+      _tail = node;
+      _head = node;
+    }
+
+    ++_size;
+  };
+
+  return { head, tail, size, prepend, append };
 }
 
 export { createNode, createLinkedList };
