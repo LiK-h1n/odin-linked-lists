@@ -24,3 +24,14 @@ describe("LinkedList - Growing & Size", () => {
     expect(list.size()).toBe(2);
   });
 });
+
+describe("LinkedList - at(index)", () => {
+  test("at(index) returns the value at that index", () => {
+    const list = createLinkedList();
+    list.append("zero");
+    list.append("one");
+    expect(list.at(0)).toBe("zero");
+    expect(list.at(1)).toBe("one");
+    expect(list.at(2)).toBeUndefined();
+  });
+});

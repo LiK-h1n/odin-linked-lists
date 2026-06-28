@@ -43,7 +43,21 @@ function createLinkedList() {
     ++_size;
   };
 
-  return { head, tail, size, prepend, append };
+  const at = (index) => {
+    if (_head === undefined || index < 0 || index >= _size) {
+      return;
+    }
+
+    let temp = _head;
+
+    for (let i = 0; i < index; ++i) {
+      temp = temp.nextNode;
+    }
+
+    return temp.value;
+  };
+
+  return { head, tail, size, prepend, append, at };
 }
 
 export { createNode, createLinkedList };
