@@ -115,7 +115,77 @@ function createLinkedList() {
     }
   };
 
-  return { head, tail, size, prepend, append, at, pop, findIndex, toString };
+  const insertAt = (index, ...values) => {
+    if (index < 0 || index > _size) {
+      throw new RangeError("Invalid index to insertAt");
+    } else {
+      if (index === 0) {
+        for (let i = values.length - 1; i > -1; --i) {
+          prepend(values[i]);
+        }
+      } else if (index === _size) {
+        values.forEach((value) => {
+          append(value);
+        });
+      } else {
+        let temp = _head;
+
+        for (let i = 0; i < index - 1; ++i) {
+          temp = temp.nextNode;
+        }
+
+        const next = temp.nextNode;
+
+        values.forEach((value) => {
+          const node = createNode(value);
+
+          temp.nextNode = node;
+          temp = temp.nextNode;
+          ++_size;
+        });
+
+        temp.nextNode = next;
+      }
+    }
+  };
+
+  const removeAt = (index) => {
+    if (index < 0 || index >= _size) {
+      throw new RangeError("Invalid index for removeAt");
+    } else if (_size === 0) {
+      return;
+    } else if (index === 0) {
+      pop();
+    } else {
+      let temp = _head;
+
+      for (let i = 0; i < index - 1; ++i) {
+        temp = temp.nextNode;
+      }
+
+      temp.nextNode = temp.nextNode.nextNode;
+
+      if (index === _size - 1) {
+        _tail = temp;
+      }
+
+      --_size;
+    }
+  };
+
+  return {
+    head,
+    tail,
+    size,
+    prepend,
+    append,
+    at,
+    pop,
+    findIndex,
+    toString,
+    insertAt,
+    removeAt,
+  };
 }
 
 export { createNode, createLinkedList };

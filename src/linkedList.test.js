@@ -70,3 +70,24 @@ describe("LinkedList - toString", () => {
     expect(list.toString()).toBe("( apple ) -> ( banana ) -> null");
   });
 });
+
+describe("LinkedList - Extra Credit", () => {
+  let list;
+  beforeEach(() => {
+    list = createLinkedList();
+    list.append(1);
+    list.append(2);
+  });
+
+  test("insertAt inserts multiple values and handles RangeError", () => {
+    list.insertAt(1, 10, 11);
+    expect(list.toString()).toBe("( 1 ) -> ( 10 ) -> ( 11 ) -> ( 2 ) -> null");
+    expect(() => list.insertAt(10, 99)).toThrow(RangeError);
+  });
+
+  test("removeAt removes node and handles RangeError", () => {
+    list.removeAt(0);
+    expect(list.head()).toBe(2);
+    expect(() => list.removeAt(5)).toThrow(RangeError);
+  });
+});
