@@ -114,7 +114,33 @@ function createLinkedList() {
     return null;
   };
 
-  return { getHead, getTail, size, append, prepend, at, pop, contains, find };
+  const toString = () => {
+    let string = "";
+    let temp = head;
+
+    while (temp !== null) {
+      string += `( ${temp.value} ) -> `;
+
+      temp = temp.next;
+    }
+
+    string += "null";
+
+    return string;
+  };
+
+  return {
+    getHead,
+    getTail,
+    size,
+    append,
+    prepend,
+    at,
+    pop,
+    contains,
+    find,
+    toString,
+  };
 }
 
 export { createNode, createLinkedList };

@@ -84,3 +84,18 @@ describe("LinkedList - Search and Remove", () => {
     expect(list.find("dragonfruit")).toBeNull();
   });
 });
+
+describe("LinkedList - String Format", () => {
+  test("toString prints the correct format", () => {
+    const list = createLinkedList();
+    list.append("dog");
+    list.append("cat");
+    list.append("parrot");
+    expect(list.toString()).toBe("( dog ) -> ( cat ) -> ( parrot ) -> null");
+  });
+
+  test("toString handles empty list", () => {
+    const list = createLinkedList();
+    expect(list.toString()).toBe("null");
+  });
+});
